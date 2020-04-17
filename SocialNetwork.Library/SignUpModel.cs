@@ -6,6 +6,7 @@ namespace SocialNetwork.Library
 {
     public class SignUpModel
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         public string Email { get; set; }
