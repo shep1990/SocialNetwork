@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Library;
+using SocialNetwork.SignUpApi.EmailServices;
 using SocialNetwork.SignUpApi.ServiceBusHelper;
 
 namespace SocialNetwork.SignUpApi.Controllers
@@ -15,35 +16,22 @@ namespace SocialNetwork.SignUpApi.Controllers
     public class SignUpController : ControllerBase
     {
         private ServiceBusSender _serviceBusSender;
-        private SmtpClient _smtpClient;
+        private IEmailService _emailSender;
 
         public SignUpController(
             ServiceBusSender serviceBusSender, 
-            SmtpClient smtpClient
+            IEmailService emailService
         )
         {
             _serviceBusSender = serviceBusSender;
-            _smtpClient = smtpClient;
+            _emailSender = emailService;
         }
 
 
         [Route("CreateProfile"), HttpPost]
         public async Task Post([FromBody] SignUpModel signUp)
         {
-            _smtpClient.Credentials = new NetworkCredential("", "");
-
-            try
-            {
-                var mail = new MailMessage("richardjohn90@hotmail.co.uk", signUp.Email);
-                mail.Subject = "Test Email";
-                mail.Body = "test Message";
-                _smtpClient.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw ex;
-            }
+            await _emailSender.SendEmail(signUp.Email);
 
             // Send this to the bus for the other services
             await _serviceBusSender.SendMessage(new SignUpModel
