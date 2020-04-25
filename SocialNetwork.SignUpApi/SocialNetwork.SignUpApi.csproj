@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SocialNetwork.Library\SocialNetwork.Library.csproj" />
+    <ProjectReference Include="..\SocialNetwork.Profile.Domain\SocialNetwork.Profile.Domain.csproj" />
   </ItemGroup>
 
 </Project>

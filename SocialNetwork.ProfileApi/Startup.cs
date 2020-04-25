@@ -31,8 +31,6 @@ namespace SocialNetwork.ProfileApi
         {
             services.AddMvc();
 
-            services.AddSingleton<IServiceBusConsumer, ServiceBusConsumer>();
-
             services.AddDbContext<ProfileDbContext>(options =>
             {
                 options.UseLazyLoadingProxies(false)
@@ -63,8 +61,6 @@ namespace SocialNetwork.ProfileApi
 
             app.UseHttpsRedirection();
 
-            var bus = app.ApplicationServices.GetService<IServiceBusConsumer>();
-            bus.RegisterOnMessageHandlerAndReceiveMessages();
 
             app.UseMvc();
         }

@@ -16,9 +16,10 @@ namespace SocialNetwork.ProfileApi.ServiceBusHelper
         private readonly IConfiguration _configuration;
         private readonly SubscriptionClient _subscriptionClient;
         private const string TOPIC_PATH = "profiletopic";
-        private const string SUBSCRIPTION_NAME = "signup";
+        private const string SUBSCRIPTION_NAME = "profileSubscription";
 
-        public ServiceBusConsumer(IConfiguration configuration)
+        public ServiceBusConsumer(
+            IConfiguration configuration        )
         {
             _configuration = configuration;
             _subscriptionClient = new SubscriptionClient(_configuration.GetConnectionString("ServiceBusConnectionString"), TOPIC_PATH, SUBSCRIPTION_NAME);
