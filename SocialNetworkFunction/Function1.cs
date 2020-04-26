@@ -6,16 +6,17 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using SocialNetwork.Library;
 using SocialNetwork.Profile.Domain.Services;
+using SocialNetwork.WebApiClient;
 
 namespace SocialNetworkFunction
 {
     public class Function1
     {
-        private readonly IProfileService _profileService;
+        private readonly IProfileApiClient _profileApiClient;
 
-        public Function1(IProfileService profileService)
+        public Function1(IProfileApiClient profileApiClient)
         {
-            _profileService = profileService;
+            _profileApiClient = profileApiClient;
         }
 
 
@@ -26,7 +27,7 @@ namespace SocialNetworkFunction
             Connection = "ServiceBusConnectionString")]string message)
         {
             var payload = JsonConvert.DeserializeObject<SignUpModel>(message);
-            await _profileService.SaveProfile(payload);          
+            await _profileApiClient.CreateProfile(payload);        
         }
     }
 }

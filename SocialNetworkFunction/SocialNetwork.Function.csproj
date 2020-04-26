@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SocialNetwork.Library\SocialNetwork.Library.csproj" />
     <ProjectReference Include="..\SocialNetwork.Profile.Domain\SocialNetwork.Profile.Domain.csproj" />
+    <ProjectReference Include="..\SocialNetwork.WebApiClient\SocialNetwork.WebApiClient.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

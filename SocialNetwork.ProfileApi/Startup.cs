@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SocialNetwork.Profile.Domain;
+using SocialNetwork.Profile.Domain.Repositories;
+using SocialNetwork.Profile.Domain.Services;
 using SocialNetwork.ProfileApi.ServiceBusHelper;
 
 namespace SocialNetwork.ProfileApi
@@ -30,6 +32,10 @@ namespace SocialNetwork.ProfileApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<ProfileDbContext>(options =>
             {
