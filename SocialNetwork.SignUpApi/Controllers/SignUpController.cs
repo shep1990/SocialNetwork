@@ -28,20 +28,13 @@ namespace SocialNetwork.SignUpApi.Controllers
         }
 
 
-        [Route("CreateProfile"), HttpPost]
+        [Route("SignUpConfirmation"), HttpPost]
         public async Task Post([FromBody] SignUpModel signUp)
         {
             await _emailSender.SendEmail(signUp.Email);
 
             // Send this to the bus for the other services
-            await _serviceBusSender.SendMessage(new SignUpModel
-            {
-                Id = signUp.Id,
-                Name = signUp.Name,
-                Email = signUp.Email,
-                Age = signUp.Age,
-                DateOfBirth = signUp.DateOfBirth
-            });
+            await _serviceBusSender.SendMessage(signUp);
         }
     }
 }

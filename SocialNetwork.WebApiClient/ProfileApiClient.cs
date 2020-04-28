@@ -15,14 +15,7 @@ namespace SocialNetwork.WebApiClient
 
         public async Task<SignUpModel> CreateProfile(SignUpModel signupModel)
         {
-            return await PostAsync<SignUpModel>(new
-            {
-                signupModel.Id,
-                signupModel.Email,
-                signupModel.Name,
-                signupModel.DateOfBirth,
-                signupModel.Age
-            }, $"/api/Profile/CreateProfile");
+            return await PostAsync<SignUpModel>(signupModel, $"/api/Profile/CreateProfile");
         }
     }
 }
