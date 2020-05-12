@@ -9,5 +9,7 @@ namespace SocialNetwork.WebApiClient
     public interface IProfileApiClient
     {
         Task<SignUpModel> CreateProfile(SignUpModel signupModel);
+
+        Task<List<SignUpModel>> GetProfiles();
     }
 }

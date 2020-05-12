@@ -30,5 +30,21 @@ namespace SocialNetwork.Profile.Domain.Services
 
             await _profileRepository.AddAsync(entity);
         }
+
+        public async Task<SignUpModel> GetProfile(Guid userId) {
+
+            var profile = await _profileRepository.GetSingleAsync(p => p.Id == userId);
+
+            var profileModel = new SignUpModel()
+            {
+                Id = profile.Id,
+                Name = profile.Name,
+                Age = profile.Age,
+                Email = profile.Email,
+                DateOfBirth = profile.DateOfBirth
+            };
+            
+            return profileModel;
+        }
     }
 }

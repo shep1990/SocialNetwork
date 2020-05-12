@@ -17,5 +17,10 @@ namespace SocialNetwork.WebApiClient
         {
             return await PostAsync<SignUpModel>(signupModel, $"/api/Profile/CreateProfile");
         }
+
+        public async Task<List<SignUpModel>> GetProfiles()
+        {
+            return await GetAsync<List<SignUpModel>>($"/api/Profile/GetProfile");
+        }
     }
 }

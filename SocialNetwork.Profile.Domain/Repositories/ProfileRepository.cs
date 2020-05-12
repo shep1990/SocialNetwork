@@ -1,6 +1,8 @@
-﻿using SocialNetwork.Profile.Domain.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Profile.Domain.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +24,18 @@ namespace SocialNetwork.Profile.Domain.Repositories
             await _unitOfWork.CommitAsync();
 
             return entity;
+        }
+
+        public async Task<List<ProfileEntity>> GetAsync()
+        {
+            var profileList = await _unitOfWork.Context.Set<ProfileEntity>().ToListAsync();
+
+            return profileList;
+        }
+
+        public async Task<ProfileEntity> GetSingleAsync(Expression<Func<ProfileEntity, bool>> predicate)
+        {
+            return await _unitOfWork.Context.Set<ProfileEntity>().SingleOrDefaultAsync(predicate);
         }
     }
 }

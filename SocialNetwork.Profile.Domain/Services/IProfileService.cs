@@ -9,5 +9,7 @@ namespace SocialNetwork.Profile.Domain.Services
     public interface IProfileService
     {
         Task SaveProfile(SignUpModel model);
+
+        Task<SignUpModel> GetProfile(Guid userId);
     }
 }

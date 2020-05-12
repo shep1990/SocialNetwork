@@ -23,7 +23,7 @@ namespace SocialNetwork.WebApiClient
                 _client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", accessToken));
             }
 
-            IRestResponse<T> response = await _client.ExecutePostTaskAsync<T>(request);
+            IRestResponse<T> response = await _client.ExecutePostAsync<T>(request);
 
             return HandleResponse(response);
         }
@@ -38,7 +38,7 @@ namespace SocialNetwork.WebApiClient
                 _client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", accessToken));
             }
 
-            IRestResponse<T> response = await _client.ExecutePostTaskAsync<T>(request);
+            IRestResponse<T> response = await _client.ExecutePostAsync<T>(request);
 
             return HandleResponse(response);
         }
@@ -60,7 +60,7 @@ namespace SocialNetwork.WebApiClient
                 }
             }
 
-            IRestResponse<T> response = await _client.ExecuteGetTaskAsync<T>(request);
+            IRestResponse<T> response = await _client.ExecuteGetAsync<T>(request);
             return HandleResponse(response);
         }
 
@@ -74,7 +74,7 @@ namespace SocialNetwork.WebApiClient
                 _client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", accessToken));
             }
 
-            IRestResponse<T> response = await _client.ExecuteTaskAsync<T>(request);
+            IRestResponse<T> response = await _client.ExecuteAsync<T>(request);
             return HandleResponse(response);
         }
 
@@ -88,7 +88,7 @@ namespace SocialNetwork.WebApiClient
                 _client.AddDefaultHeader("Authorization", string.Format("Bearer {0}", accessToken));
             }
 
-            IRestResponse<T> response = await _client.ExecuteTaskAsync<T>(request);
+            IRestResponse<T> response = await _client.ExecuteAsync<T>(request);
             return HandleResponse(response);
         }
 

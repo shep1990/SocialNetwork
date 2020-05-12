@@ -6,14 +6,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SocialNetwork.SignUpApi.ServiceBusHelper;
 using SocialNetwork.SignUpApi.EmailServices;
+using Microsoft.Extensions.Logging;
 
 namespace SocialNetwork.SignUpApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
+            loggerFactory.AddLog4Net("log4net.config");
         }
 
         public IConfiguration Configuration { get; }

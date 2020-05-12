@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://profileApi.com",
+      "applicationUrl": "https://profileApi.gts.com",
       "sslPort": 0
     },
     "iisExpress": {
@@ -24,7 +24,7 @@
     "SocialNetwork.ProfileApi": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "http://profileApi.com",
+      "launchUrl": "https://profileApi.gts.com",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

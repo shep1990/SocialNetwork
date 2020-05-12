@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using SocialNetwork.Library;
+using SocialNetwork.WebApiClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,16 @@ namespace SocialNetwork.ProfileApi.ServiceBusHelper
         private readonly SubscriptionClient _subscriptionClient;
         private const string TOPIC_PATH = "profiletopic";
         private const string SUBSCRIPTION_NAME = "profileSubscription";
+        private readonly IProfileApiClient _profileApiClient;
 
         public ServiceBusConsumer(
-            IConfiguration configuration        )
+            IConfiguration configuration,
+            IProfileApiClient profileApiClient
+        )
         {
             _configuration = configuration;
             _subscriptionClient = new SubscriptionClient(_configuration.GetConnectionString("ServiceBusConnectionString"), TOPIC_PATH, SUBSCRIPTION_NAME);
+            _profileApiClient = profileApiClient;
         }
 
         public void RegisterOnMessageHandlerAndReceiveMessages()
@@ -39,6 +44,16 @@ namespace SocialNetwork.ProfileApi.ServiceBusHelper
         private async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
             var myPayload = JsonConvert.DeserializeObject<SignUpModel>(Encoding.UTF8.GetString(message.Body));
+
+            await _profileApiClient.CreateProfile(new SignUpModel
+            {
+                Id = myPayload.Id,
+                Age = myPayload.Age,
+                DateOfBirth = myPayload.DateOfBirth,
+                Email = myPayload.Email,
+                Name = myPayload.Name
+            });
+
             await _subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
         }
 

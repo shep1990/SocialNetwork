@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.ProfileApi", "SocialNetwork.ProfileApi\SocialNetwork.ProfileApi.csproj", "{21B4D403-DDC3-4793-A36F-DE1AE23378C6}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SignUpApi", "SignUpApi", "{DB217C9A-A25E-47ED-98AC-8C0D3C05F45F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.SignUpApi", "SocialNetwork.SignUpApi\SocialNetwork.SignUpApi.csproj", "{8A787886-04AB-447F-B797-4209A4540AB4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Function", "SocialNetwork.Function\SocialNetwork.Function.csproj", "{F5DF4177-F9E7-40D7-919C-46CDA3D05190}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiClient", "ApiClient", "{2369A69A-947F-4D07-A3A0-3E144A242FF4}"
 EndProject
@@ -43,10 +41,6 @@ Global
 		{8A787886-04AB-447F-B797-4209A4540AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A787886-04AB-447F-B797-4209A4540AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A787886-04AB-447F-B797-4209A4540AB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5DF4177-F9E7-40D7-919C-46CDA3D05190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5DF4177-F9E7-40D7-919C-46CDA3D05190}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5DF4177-F9E7-40D7-919C-46CDA3D05190}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5DF4177-F9E7-40D7-919C-46CDA3D05190}.Release|Any CPU.Build.0 = Release|Any CPU
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,7 +53,6 @@ Global
 		{21B4D403-DDC3-4793-A36F-DE1AE23378C6} = {C1D526CE-9A68-44D4-8E76-CEBBBC6B30C6}
 		{8A7C602F-6BFF-4AF3-8E07-AC86A5DB6370} = {C1D526CE-9A68-44D4-8E76-CEBBBC6B30C6}
 		{8A787886-04AB-447F-B797-4209A4540AB4} = {DB217C9A-A25E-47ED-98AC-8C0D3C05F45F}
-		{F5DF4177-F9E7-40D7-919C-46CDA3D05190} = {C1D526CE-9A68-44D4-8E76-CEBBBC6B30C6}
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737} = {2369A69A-947F-4D07-A3A0-3E144A242FF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
