@@ -37,5 +37,16 @@ namespace SocialNetwork.Profile.Domain.Repositories
         {
             return await _unitOfWork.Context.Set<ProfileEntity>().SingleOrDefaultAsync(predicate);
         }
+
+        public async Task UpdateAsync(ProfileEntity entity)
+        {
+            _unitOfWork.Context.Set<ProfileEntity>().Attach(entity);
+
+            var entry = _unitOfWork.Context.Entry(entity);
+            entry.State = EntityState.Modified;
+
+
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

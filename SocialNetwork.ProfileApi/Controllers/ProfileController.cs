@@ -6,6 +6,7 @@ using log4net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using SocialNetwork.Library;
 using SocialNetwork.Profile.Domain.Services;
 
@@ -41,11 +42,28 @@ namespace SocialNetwork.ProfileApi.Controllers
 
         [Route("GetProfile/{userId}"), HttpGet]
         [EnableCors("CorsPolicy")]
-        public async Task<SignUpModel> Get(Guid userId)
+        public async Task<IActionResult> Get(Guid userId)
         {
             try
             {
-                return await _profileService.GetProfile(userId);
+                var profile = await _profileService.GetProfile(userId);
+                return Ok(profile);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(String.Format("An exception was thrown: {0}", ex));
+                return BadRequest(ex);
+            }
+        }
+
+        [Route("UpdateProfile/{userId}"), HttpPost]
+        [EnableCors("CorsPolicy")]
+        public async Task Put([FromBody] SignUpModel profile, Guid userId)
+        {
+            try
+            {
+
+                await _profileService.UpdateProfile(profile, userId);
             }
             catch (Exception ex)
             {

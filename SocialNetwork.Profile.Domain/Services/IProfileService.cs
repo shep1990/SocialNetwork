@@ -11,5 +11,7 @@ namespace SocialNetwork.Profile.Domain.Services
         Task SaveProfile(SignUpModel model);
 
         Task<SignUpModel> GetProfile(Guid userId);
+
+        Task UpdateProfile(SignUpModel model, Guid userId);
     }
 }

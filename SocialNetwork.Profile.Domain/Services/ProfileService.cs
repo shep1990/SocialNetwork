@@ -46,5 +46,19 @@ namespace SocialNetwork.Profile.Domain.Services
             
             return profileModel;
         }
+
+        public async Task UpdateProfile(SignUpModel model, Guid userId)
+        {
+            var entity = new ProfileEntity()
+            {
+                Id = userId,
+                Name = model.Name,
+                Age = model.Age,
+                DateOfBirth = model.DateOfBirth,
+                Email = model.Email
+            };
+
+            await _profileRepository.UpdateAsync(entity);
+        }
     }
 }

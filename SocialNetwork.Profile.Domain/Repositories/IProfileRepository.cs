@@ -14,5 +14,7 @@ namespace SocialNetwork.Profile.Domain.Repositories
         Task<List<ProfileEntity>> GetAsync();
 
         Task<ProfileEntity> GetSingleAsync(Expression<Func<ProfileEntity, bool>> predicate);
+
+        Task UpdateAsync(ProfileEntity entity);
     }
 }
