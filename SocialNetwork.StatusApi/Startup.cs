@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using SocialNetwork.Status.Domain;
 using SocialNetwork.Status.Domain.Repositories;
 using SocialNetwork.Status.Domain.Services;
+using SocialNetwork.StatusApi.ServiceBusHelper;
 
 namespace SocialNetwork.StatusApi
 {
@@ -33,6 +34,7 @@ namespace SocialNetwork.StatusApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ServiceBusSender>();
             services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IStatusService, StatusService>();
@@ -74,7 +76,7 @@ namespace SocialNetwork.StatusApi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
 
             var forwardOptions = new ForwardedHeadersOptions

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Library;
 using SocialNetwork.Status.Domain.Services;
+using SocialNetwork.StatusApi.ServiceBusHelper;
 
 namespace SocialNetwork.StatusApi.Controllers
 {
@@ -18,20 +19,25 @@ namespace SocialNetwork.StatusApi.Controllers
     {
         private readonly IStatusService _statusService;
         private readonly ILog _logger = LogManager.GetLogger(typeof(StatusController));
+        private ServiceBusSender _serviceBusSender;
 
-        public StatusController(IStatusService statusService)
+        public StatusController(
+            IStatusService statusService,
+            ServiceBusSender serviceBusSender
+        )
         {
             _statusService = statusService;
+            _serviceBusSender = serviceBusSender;
         }
 
         [Route("CreateStatus/{userId}"), HttpPost]
-        [EnableCors("CorsPolicy")]
         public async Task Post([FromBody] StatusModel status, Guid userId)
         {
             try
             {
                 status.UserId = userId != Guid.Empty ? userId : throw new Exception("User was not provided");
                 await _statusService.SaveStatus(status);
+                await _serviceBusSender.SendMessage(status);
             }
             catch (Exception ex)
             {
