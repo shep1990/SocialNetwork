@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Library;
+using SocialNetwork.Profile.Domain.Services;
 using SocialNetwork.Status.Domain.Services;
 using SocialNetwork.StatusApi.ServiceBusHelper;
 
@@ -44,6 +45,13 @@ namespace SocialNetwork.StatusApi.Controllers
                 _logger.Error(String.Format("An exception was thrown: {0}", ex));
                 throw ex;
             }
+        }
+
+        [Route("GetStatusList/{userId}"), HttpGet]
+        public async Task<IActionResult> Get(Guid userId)
+        {
+            var statusList = await _statusService.GetStatusList(userId);
+            return Ok(statusList);
         }
     }
 }

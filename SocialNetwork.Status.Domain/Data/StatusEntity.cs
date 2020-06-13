@@ -10,6 +10,8 @@ namespace SocialNetwork.Status.Domain.Data
 
         public Guid UserId { get; set; }
 
+        public string Name { get; set; }
+
         public string Status { get; set; } 
     }
 }

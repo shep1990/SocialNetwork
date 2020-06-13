@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialNetwork.Status.Domain;
 
 namespace SocialNetwork.Status.Domain.Migrations
 {
     [DbContext(typeof(StatusDbContext))]
-    partial class StatusDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200612101456_AddNameColumnToStatus")]
+    partial class AddNameColumnToStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -10,5 +10,6 @@ namespace SocialNetwork.Status.Domain.Services
     public interface IStatusService
     {
         Task<StatusEntity> SaveStatus(StatusModel model);
+        Task<List<StatusModel>> GetStatusList(Guid userId);
     }
 }

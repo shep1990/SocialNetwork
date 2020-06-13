@@ -3,6 +3,8 @@ using SocialNetwork.Status.Domain.Data;
 using SocialNetwork.Status.Domain.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,10 +24,27 @@ namespace SocialNetwork.Status.Domain.Services
             var entity = new StatusEntity()
             {
                 Status = model.Status,
-                UserId = model.UserId
+                UserId = model.UserId,
+                Name = model.Name
             };
 
             return await _statusRepository.AddAsync(entity);
+        }
+
+        public async Task<List<StatusModel>> GetStatusList(Guid userId)
+        {
+            var statusList = await _statusRepository.GetAsync(userId);
+
+            var statusModel = new List<StatusModel>();
+
+            foreach (var status in statusList)
+            {
+                statusModel.Add(new StatusModel
+                {
+                    Status = status.Status
+                });
+            }
+            return statusModel;
         }
     }
 }
