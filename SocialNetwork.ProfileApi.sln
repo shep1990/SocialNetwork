@@ -11,10 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfileApi", "ProfileApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Profile.Domain", "SocialNetwork.Profile.Domain\SocialNetwork.Profile.Domain.csproj", "{8A7C602F-6BFF-4AF3-8E07-AC86A5DB6370}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SignUpApi", "SignUpApi", "{DB217C9A-A25E-47ED-98AC-8C0D3C05F45F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.SignUpApi", "SocialNetwork.SignUpApi\SocialNetwork.SignUpApi.csproj", "{8A787886-04AB-447F-B797-4209A4540AB4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiClient", "ApiClient", "{2369A69A-947F-4D07-A3A0-3E144A242FF4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.WebApiClient", "SocialNetwork.WebApiClient\SocialNetwork.WebApiClient.csproj", "{568EB5EC-2A11-4D7F-887A-91B97FDB1737}"
@@ -27,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.StatusApi", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationsApi", "NotificationsApi", "{18BA25AE-51D4-4435-896D-F15188F3113F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.NotificationsApi", "SocialNetwork.NotificationsApi\SocialNetwork.NotificationsApi.csproj", "{BE945FA5-4716-4BDA-B378-1CFF83EB2461}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.NotificationsApi", "SocialNetwork.NotificationsApi\SocialNetwork.NotificationsApi.csproj", "{BE945FA5-4716-4BDA-B378-1CFF83EB2461}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +43,6 @@ Global
 		{8A7C602F-6BFF-4AF3-8E07-AC86A5DB6370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A7C602F-6BFF-4AF3-8E07-AC86A5DB6370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A7C602F-6BFF-4AF3-8E07-AC86A5DB6370}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A787886-04AB-447F-B797-4209A4540AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A787886-04AB-447F-B797-4209A4540AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A787886-04AB-447F-B797-4209A4540AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A787886-04AB-447F-B797-4209A4540AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,7 +66,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{21B4D403-DDC3-4793-A36F-DE1AE23378C6} = {C1D526CE-9A68-44D4-8E76-CEBBBC6B30C6}
 		{8A7C602F-6BFF-4AF3-8E07-AC86A5DB6370} = {C1D526CE-9A68-44D4-8E76-CEBBBC6B30C6}
-		{8A787886-04AB-447F-B797-4209A4540AB4} = {DB217C9A-A25E-47ED-98AC-8C0D3C05F45F}
 		{568EB5EC-2A11-4D7F-887A-91B97FDB1737} = {2369A69A-947F-4D07-A3A0-3E144A242FF4}
 		{349CA5F7-5228-4859-A059-01066167A2CC} = {7F641DA3-429F-441E-8010-D3AD05408407}
 		{37ABA94A-D335-4F17-B3A1-C0B0206E463C} = {7F641DA3-429F-441E-8010-D3AD05408407}
