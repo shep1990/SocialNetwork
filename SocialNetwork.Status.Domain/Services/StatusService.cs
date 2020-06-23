@@ -41,7 +41,9 @@ namespace SocialNetwork.Status.Domain.Services
             {
                 statusModel.Add(new StatusModel
                 {
-                    Status = status.Status
+                    UserId = status.UserId,
+                    Status = status.Status,
+                    Name = status.Name
                 });
             }
             return statusModel;
