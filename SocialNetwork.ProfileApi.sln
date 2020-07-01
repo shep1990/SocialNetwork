@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationsApi", "Notific
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.NotificationsApi", "SocialNetwork.NotificationsApi\SocialNetwork.NotificationsApi.csproj", "{BE945FA5-4716-4BDA-B378-1CFF83EB2461}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Notification.Domain", "SocialNetwork.Notification.Domain\SocialNetwork.Notification.Domain.csproj", "{E32F8C3A-7287-433D-8550-17357F3E503B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{BE945FA5-4716-4BDA-B378-1CFF83EB2461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE945FA5-4716-4BDA-B378-1CFF83EB2461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE945FA5-4716-4BDA-B378-1CFF83EB2461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E32F8C3A-7287-433D-8550-17357F3E503B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E32F8C3A-7287-433D-8550-17357F3E503B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E32F8C3A-7287-433D-8550-17357F3E503B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E32F8C3A-7287-433D-8550-17357F3E503B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{349CA5F7-5228-4859-A059-01066167A2CC} = {7F641DA3-429F-441E-8010-D3AD05408407}
 		{37ABA94A-D335-4F17-B3A1-C0B0206E463C} = {7F641DA3-429F-441E-8010-D3AD05408407}
 		{BE945FA5-4716-4BDA-B378-1CFF83EB2461} = {18BA25AE-51D4-4435-896D-F15188F3113F}
+		{E32F8C3A-7287-433D-8550-17357F3E503B} = {18BA25AE-51D4-4435-896D-F15188F3113F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D7FD14A-09BE-4DD1-971D-2E3AC2C013F4}

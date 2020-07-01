@@ -3,6 +3,7 @@ using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using SocialNetwork.Library;
+using SocialNetwork.Notification.Domain.Services;
 using SocialNetwork.NotificationsApi.Notifications;
 using SocialNetwork.WebApiClient;
 using System;
@@ -21,15 +22,18 @@ namespace SocialNetwork.NotificationsApi.ServiceBusHelper
         private const string TOPIC_PATH = "statustopic";
         private const string SUBSCRIPTION_NAME = "statusSubscription";
         IHubContext<NotificationsHub, INotificationHub> _notificationsHubContext;
+        private readonly INotificationService _notificationService;
 
         public ServiceBusConsumer(
             IConfiguration configuration,
-            IHubContext<NotificationsHub, INotificationHub> notificationsHubContext
+            IHubContext<NotificationsHub, INotificationHub> notificationsHubContext,
+            INotificationService notificationService
         )
         {
             _configuration = configuration;
             _subscriptionClient = new SubscriptionClient(_configuration.GetConnectionString("ServiceBusConnectionString"), TOPIC_PATH, SUBSCRIPTION_NAME);
             _notificationsHubContext = notificationsHubContext;
+            _notificationService = notificationService;
         }
 
         public void RegisterOnMessageHandlerAndReceiveMessages()
@@ -46,6 +50,15 @@ namespace SocialNetwork.NotificationsApi.ServiceBusHelper
         private async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
             var myPayload = JsonConvert.DeserializeObject<StatusModel>(Encoding.UTF8.GetString(message.Body));
+
+            var notification = new NotificationModel
+            {
+                UserId = myPayload.UserId,
+                NotificationMessage = myPayload.Status,
+                UserName = myPayload.Name
+            };
+
+            await _notificationService.AddNotification(notification);
 
             await _notificationsHubContext.Clients.All.BroadcastMessage("Status", myPayload.Status);
 
