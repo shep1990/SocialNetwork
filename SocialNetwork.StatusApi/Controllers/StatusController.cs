@@ -37,8 +37,12 @@ namespace SocialNetwork.StatusApi.Controllers
             try
             {
                 status.UserId = userId != Guid.Empty ? userId : throw new Exception("User was not provided");
-                await _statusService.SaveStatus(status);
-                await _serviceBusSender.SendMessage(status);
+                var statusObj = await _statusService.SaveStatus(status);
+
+                if(statusObj != null)
+                {
+                    await _serviceBusSender.SendMessage(status);
+                }
             }
             catch (Exception ex)
             {
@@ -50,8 +54,16 @@ namespace SocialNetwork.StatusApi.Controllers
         [Route("GetStatusList/{userId}"), HttpGet]
         public async Task<IActionResult> Get(Guid userId)
         {
-            var statusList = await _statusService.GetStatusList(userId);
-            return Ok(statusList);
+            try
+            {
+                var statusList = await _statusService.GetStatusList(userId);
+                return Ok(statusList);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(String.Format("An exception was thrown: {0}", ex));
+                return BadRequest(ex);
+            }
         }
     }
 }

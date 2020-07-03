@@ -33,10 +33,10 @@ namespace SocialNetwork.NotificationsApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IServiceBusConsumer, ServiceBusConsumer>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<INotificationRepository, NotificationRepository>();
-            services.AddScoped<INotificationService, NotificationService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<INotificationRepository, NotificationRepository>();
+            services.AddTransient<INotificationService, NotificationService>();
+            services.AddSingleton<IServiceBusConsumer, ServiceBusConsumer>();
 
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder => {
                 builder
@@ -56,7 +56,7 @@ namespace SocialNetwork.NotificationsApi
                     //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
                     sqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(10), errorNumbersToAdd: null);
                 });
-            });
+            }, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
             services.AddSignalR();
 

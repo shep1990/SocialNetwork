@@ -1,4 +1,5 @@
-﻿using SocialNetwork.Library;
+﻿using log4net;
+using SocialNetwork.Library;
 using SocialNetwork.Profile.Domain.Data;
 using SocialNetwork.Profile.Domain.Repositories;
 using System;
@@ -11,54 +12,79 @@ namespace SocialNetwork.Profile.Domain.Services
     public class ProfileService : IProfileService
     {
         private readonly IProfileRepository _profileRepository;
+        private readonly ILog _logger = LogManager.GetLogger(typeof(ProfileService));
 
         public ProfileService(IProfileRepository profileRepository)
         {
             _profileRepository = profileRepository;
         }
 
-        public async Task SaveProfile(SignUpModel model)
+        public async Task<ProfileEntity> SaveProfile(SignUpModel model)
         {
-            var entity = new ProfileEntity()
+            try
             {
-                Id = model.Id,
-                Name = model.Name,
-                Age = model.Age,
-                DateOfBirth = model.DateOfBirth,
-                Email = model.Email
-            };
+                var entity = new ProfileEntity()
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Age = model.Age,
+                    DateOfBirth = model.DateOfBirth,
+                    Email = model.Email
+                };
 
-            await _profileRepository.AddAsync(entity);
+                return await _profileRepository.AddAsync(entity);           
+            }
+            catch(Exception ex)
+            {
+                _logger.Error(String.Format("An exception was thrown in the profile service: {0}", ex.Message));
+                throw ex;
+            }
         }
 
-        public async Task<SignUpModel> GetProfile(Guid userId) {
-
-            var profile = await _profileRepository.GetSingleAsync(p => p.Id == userId);
-
-            var profileModel = new SignUpModel()
+        public async Task<SignUpModel> GetProfile(Guid userId) 
+        {
+            try
             {
-                Id = profile.Id,
-                Name = profile.Name,
-                Age = profile.Age,
-                Email = profile.Email,
-                DateOfBirth = profile.DateOfBirth
-            };
-            
-            return profileModel;
+                var profile = await _profileRepository.GetSingleAsync(p => p.Id == userId);
+
+                var profileModel = new SignUpModel()
+                {
+                    Id = profile.Id,
+                    Name = profile.Name,
+                    Age = profile.Age,
+                    Email = profile.Email,
+                    DateOfBirth = profile.DateOfBirth
+                };
+
+                return profileModel;
+            }
+            catch(Exception ex)
+            {
+                _logger.Error(String.Format("An exception was thrown in the profile service: {0}", ex.Message));
+                throw ex;
+            }
         }
 
-        public async Task UpdateProfile(SignUpModel model, Guid userId)
+        public async Task<ProfileEntity> UpdateProfile(SignUpModel model, Guid userId)
         {
-            var entity = new ProfileEntity()
+            try
             {
-                Id = userId,
-                Name = model.Name,
-                Age = model.Age,
-                DateOfBirth = model.DateOfBirth,
-                Email = model.Email
-            };
+                var entity = new ProfileEntity()
+                {
+                    Id = userId,
+                    Name = model.Name,
+                    Age = model.Age,
+                    DateOfBirth = model.DateOfBirth,
+                    Email = model.Email
+                };
 
-            await _profileRepository.UpdateAsync(entity);
+                return await _profileRepository.UpdateAsync(entity);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(String.Format("An exception was thrown in the profile service: {0}", ex.Message));
+                throw ex;
+            }
         }
     }
 }

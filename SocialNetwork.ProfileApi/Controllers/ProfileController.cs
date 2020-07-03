@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using SocialNetwork.Library;
+using SocialNetwork.Profile.Domain.Data;
 using SocialNetwork.Profile.Domain.Services;
 
 namespace SocialNetwork.ProfileApi.Controllers
@@ -27,16 +28,17 @@ namespace SocialNetwork.ProfileApi.Controllers
 
         [Route("CreateProfile"), HttpPost]
         [AllowAnonymous]
-        public async Task Post([FromBody] SignUpModel signUp)
+        public async Task<IActionResult> Post([FromBody] SignUpModel signUp)
         {
             try
             {
-                await _profileService.SaveProfile(signUp);
+                var profile = await _profileService.SaveProfile(signUp);
+                return Ok();                
             }
             catch (Exception ex)
             {
                 _logger.Error(String.Format("An exception was thrown: {0}", ex));
-                throw ex;
+                return BadRequest(ex);
             }
         }
 
@@ -58,17 +60,17 @@ namespace SocialNetwork.ProfileApi.Controllers
 
         [Route("UpdateProfile/{userId}"), HttpPost]
         [EnableCors("CorsPolicy")]
-        public async Task Put([FromBody] SignUpModel profile, Guid userId)
+        public async Task<IActionResult> Put([FromBody] SignUpModel profile, Guid userId)
         {
             try
             {
-
-                await _profileService.UpdateProfile(profile, userId);
+                var response = await _profileService.UpdateProfile(profile, userId);
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 _logger.Error(String.Format("An exception was thrown: {0}", ex));
-                throw ex;
+                return BadRequest(ex);
             }
         }
     }

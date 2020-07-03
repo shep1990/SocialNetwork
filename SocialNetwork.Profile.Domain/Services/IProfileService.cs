@@ -1,4 +1,5 @@
 ﻿using SocialNetwork.Library;
+using SocialNetwork.Profile.Domain.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,10 +9,10 @@ namespace SocialNetwork.Profile.Domain.Services
 {
     public interface IProfileService
     {
-        Task SaveProfile(SignUpModel model);
+        Task<ProfileEntity> SaveProfile(SignUpModel model);
 
         Task<SignUpModel> GetProfile(Guid userId);
 
-        Task UpdateProfile(SignUpModel model, Guid userId);
+        Task<ProfileEntity> UpdateProfile(SignUpModel model, Guid userId);
     }
 }
