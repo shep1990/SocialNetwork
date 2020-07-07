@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using log4net;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using RestSharp.Extensions;
@@ -7,6 +8,7 @@ using SocialNetwork.Profile.Domain.Data;
 using SocialNetwork.Profile.Domain.Services;
 using SocialNetwork.ProfileApi.Controllers;
 using System;
+using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
@@ -17,12 +19,9 @@ namespace SocialNetwork.Profile.Test
     {
         SignUpModel profileModel;
         ProfileEntity profileEntity;
-        Guid userId;
 
         public ProfileControllerTest()
-        {
-            userId = new Guid("2f6364c3-7574-48d8-91e4-9dce8627dc9d");
-
+        {          
             profileModel = new SignUpModel()
             {
                 Id = new Guid("2f6364c3-7574-48d8-91e4-9dce8627dc9d"),
@@ -51,7 +50,7 @@ namespace SocialNetwork.Profile.Test
             var sut = new ProfileController(mockProfileService.Object);
 
             //act
-            var result = await sut.Get(userId) as OkObjectResult;
+            var result = await sut.Get(It.IsAny<Guid>()) as OkObjectResult;
             var resultValue = (SignUpModel)result.Value;
 
             //assert
@@ -79,15 +78,64 @@ namespace SocialNetwork.Profile.Test
         {
             //arrange
             var mockProfileService = new Mock<IProfileService>();
-            mockProfileService.Setup(x => x.UpdateProfile(profileModel, userId)).ReturnsAsync(profileEntity);
+            mockProfileService.Setup(x => x.UpdateProfile(profileModel, It.IsAny<Guid>())).ReturnsAsync(profileEntity);
             var sut = new ProfileController(mockProfileService.Object);
 
             //act
-            var result = await sut.Put(profileModel, userId) as OkObjectResult;
+            var result = await sut.Put(profileModel, It.IsAny<Guid>()) as OkObjectResult;
             var resultObj = (ProfileEntity)result.Value;
 
             //assert
             Assert.AreEqual(profileEntity.Id, resultObj.Id);
+        }
+
+
+        [Test]
+        public async Task ProfileController_GetProfile_ExceptionThrown()
+        { 
+            //arrange
+            var mockProfileService = new Mock<IProfileService>();
+            mockProfileService.Setup(x => x.GetProfile(It.IsAny<Guid>())).Throws(new Exception());
+            var sut = new ProfileController(mockProfileService.Object);
+
+            //act
+            var result = await sut.Get(It.IsAny<Guid>()) as BadRequestObjectResult;
+            var statusCode = result.StatusCode;
+
+            //assert
+            Assert.AreEqual(400, statusCode);
+        }
+
+        [Test]
+        public async Task ProfileController_CreateProfile_ExceptionThrown()
+        {
+            //arrange
+            var mockProfileService = new Mock<IProfileService>();
+            mockProfileService.Setup(x => x.SaveProfile(profileModel)).Throws(new Exception());
+            var sut = new ProfileController(mockProfileService.Object);
+
+            //act
+            var result = await sut.Post(profileModel) as BadRequestObjectResult;
+            var statusCode = result.StatusCode;
+
+            //assert
+            Assert.AreEqual(400, statusCode);
+        }
+
+        [Test]
+        public async Task ProfileController_UpdateProfile_ExceptionThrown()
+        {
+            //arrange
+            var mockProfileService = new Mock<IProfileService>();
+            mockProfileService.Setup(x => x.UpdateProfile(profileModel, It.IsAny<Guid>())).Throws(new Exception());
+            var sut = new ProfileController(mockProfileService.Object);
+
+            //act
+            var result = await sut.Put(profileModel, It.IsAny<Guid>()) as BadRequestObjectResult;
+            var statusCode = result.StatusCode;
+
+            //assert
+            Assert.AreEqual(400, statusCode);
         }
     }
 }
